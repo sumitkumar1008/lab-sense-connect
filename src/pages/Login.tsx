@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
@@ -18,20 +18,28 @@ const Login = () => {
     confirmPassword: "" 
   });
 
+  const navigate = useNavigate(); // ✅ For redirecting after login/signup
+
   const handleLogin = (e: React.FormEvent) => {
     e.preventDefault();
-    // Placeholder - no backend logic yet
+    // Placeholder - simulate successful login
     console.log("Login attempted:", loginData);
+
+    // ✅ After successful login, redirect to Dashboard
+    navigate("/dashboard");
   };
 
   const handleSignup = (e: React.FormEvent) => {
     e.preventDefault();
-    // Placeholder - no backend logic yet
-    console.log("Signup attempted:", signupData);
     if (signupData.password !== signupData.confirmPassword) {
       alert("Passwords don't match!");
       return;
     }
+    // Placeholder - simulate successful signup
+    console.log("Signup attempted:", signupData);
+
+    // ✅ After successful signup, redirect to Dashboard
+    navigate("/dashboard");
   };
 
   return (
@@ -43,7 +51,9 @@ const Login = () => {
             <div className="w-12 h-12 bg-gradient-primary rounded-xl flex items-center justify-center transition-transform duration-300 group-hover:scale-110 group-hover:rotate-3">
               <Activity className="w-7 h-7 text-primary-foreground" />
             </div>
-            <span className="text-2xl font-bold text-foreground transition-colors duration-300 group-hover:text-primary">LabSense</span>
+            <span className="text-2xl font-bold text-foreground transition-colors duration-300 group-hover:text-primary">
+              LabSense
+            </span>
           </Link>
           <p className="mt-2 text-muted-foreground">Access your health insights</p>
         </div>

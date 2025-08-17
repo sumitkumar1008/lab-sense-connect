@@ -1,4 +1,5 @@
-import { Link } from "react-router-dom";
+import { useEffect } from "react";
+import { useLocation, Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { FileText, MessageSquare, Shield, ArrowRight, Upload, Brain, CheckCircle } from "lucide-react";
@@ -23,8 +24,21 @@ const Home = () => {
     }
   ];
 
+  // 🔥 Handle scroll-to-section from navbar
+  const location = useLocation();
+  useEffect(() => {
+    const params = new URLSearchParams(location.search);
+    const section = params.get("scroll");
+    if (section) {
+      const el = document.getElementById(section);
+      if (el) {
+        el.scrollIntoView({ behavior: "smooth" });
+      }
+    }
+  }, [location]);
+
   return (
-    <div className="min-h-screen bg-gradient-subtle">
+    <div className="min-h-screen bg-gradient-subtle scroll-smooth">
       {/* Hero Section */}
       <section className="relative py-20 px-4 sm:px-6 lg:px-8">
         <div className="max-w-7xl mx-auto">
@@ -48,8 +62,10 @@ const Home = () => {
                     Get Started <ArrowRight className="ml-2 h-5 w-5" />
                   </Link>
                 </Button>
+
+                {/* Learn More button goes to About */}
                 <Button asChild variant="outline" size="lg" className="hover:scale-105 transition-all duration-300">
-                  <Link to="#features">Learn More</Link>
+                  <a href="#about">Learn More</a>
                 </Button>
               </div>
 
@@ -83,10 +99,10 @@ const Home = () => {
       <section id="features" className="py-20 px-4 sm:px-6 lg:px-8">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-16">
-            <h2 className="text-3xl sm:text-4xl font-bold text-foreground mb-4">
+            <h2 className="text-3xl sm:text-4xl font-bold text-foreground mb-4 text-yellow-400 " >
               Why Choose LabSense?
             </h2>
-            <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
+            <p className="text-xl text-muted-foreground max-w-3xl mx-auto ">
               Our AI-powered platform makes medical testing accessible, understandable, and actionable for everyone.
             </p>
           </div>
@@ -95,17 +111,17 @@ const Home = () => {
             {features.map((feature, index) => (
               <Card 
                 key={index} 
-                className="border-0 shadow-soft hover:shadow-medium transition-all duration-500 hover:scale-105 animate-fade-in group"
+                className="border-0 shadow-soft hover:shadow-medium transition-all duration-500 hover:scale-105 animate-fade-in group bg-blue-950"
                 style={{ animationDelay: `${index * 200 + 1000}ms` }}
               >
-                <CardHeader className="text-center">
-                  <div className="w-16 h-16 bg-primary-light rounded-full flex items-center justify-center mx-auto mb-4 group-hover:animate-float">
+                <CardHeader className="text-center text-yellow-400">
+                  <div className="w-16 h-16 bg-primary-light rounded-full flex items-center justify-center mx-auto mb-4 group-hover:animate-float ">
                     <feature.icon className="h-8 w-8 text-primary transition-transform duration-300 group-hover:scale-110" />
                   </div>
                   <CardTitle className="text-xl">{feature.title}</CardTitle>
                 </CardHeader>
                 <CardContent>
-                  <CardDescription className="text-center text-base">
+                  <CardDescription className="text-center text-base ">
                     {feature.description}
                   </CardDescription>
                 </CardContent>
@@ -115,6 +131,7 @@ const Home = () => {
         </div>
       </section>
 
+      {/* About Section */}
       <section id="about" className="py-20 px-4 sm:px-6 lg:px-8 bg-card">
         <div className="max-w-4xl mx-auto text-center">
           <h2 className="text-3xl sm:text-4xl font-bold text-foreground mb-8 animate-fade-in">

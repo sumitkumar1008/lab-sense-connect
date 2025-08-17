@@ -7,12 +7,21 @@ const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const location = useLocation();
 
-  const isActive = (path: string) => location.pathname === path;
+  // Improved isActive to also check query params like ?scroll=features
+  const isActive = (path: string) => {
+    const [pathname, search] = path.split("?");
+    return (
+      location.pathname === pathname &&
+      (search ? location.search.includes(search) : true)
+    );
+  };
 
+  // ✅ Added Dashboard link
   const navLinks = [
     { name: "Home", path: "/" },
-    { name: "Features", path: "/#features" },
-    { name: "About", path: "/#about" },
+    { name: "Features", path: "/?scroll=features" },
+    { name: "About", path: "/?scroll=about" },
+    { name: "Dashboard", path: "/dashboard" }, // NEW
   ];
 
   return (
@@ -24,7 +33,9 @@ const Navbar = () => {
             <div className="w-8 h-8 bg-gradient-primary rounded-lg flex items-center justify-center transition-transform duration-300 group-hover:scale-110 group-hover:rotate-3">
               <Activity className="w-5 h-5 text-primary-foreground" />
             </div>
-            <span className="text-xl font-bold text-foreground transition-colors duration-300 group-hover:text-primary">LabSense</span>
+            <span className="text-xl font-bold text-foreground transition-colors duration-300 group-hover:text-primary">
+              LabSense
+            </span>
           </Link>
 
           {/* Desktop Navigation */}
@@ -34,14 +45,21 @@ const Navbar = () => {
                 key={link.name}
                 to={link.path}
                 className={`text-sm font-medium transition-all duration-300 hover:text-primary hover:scale-105 relative after:absolute after:bottom-[-4px] after:left-0 after:w-0 after:h-0.5 after:bg-primary after:transition-all after:duration-300 hover:after:w-full ${
-                  isActive(link.path) ? "text-primary after:w-full" : "text-muted-foreground"
+                  isActive(link.path)
+                    ? "text-primary after:w-full"
+                    : "text-muted-foreground"
                 }`}
                 style={{ animationDelay: `${index * 100}ms` }}
               >
                 {link.name}
               </Link>
             ))}
-            <Button asChild variant="default" size="sm" className="hover:scale-105 transition-all duration-300">
+            <Button
+              asChild
+              variant="default"
+              size="sm"
+              className="hover:scale-105 transition-all duration-300"
+            >
               <Link to="/login">Login</Link>
             </Button>
           </div>
@@ -67,17 +85,22 @@ const Navbar = () => {
                 <Link
                   key={link.name}
                   to={link.path}
+                  onClick={() => setIsOpen(false)}
                   className={`block px-3 py-2 text-base font-medium transition-all duration-300 hover:text-primary hover:translate-x-2 ${
                     isActive(link.path) ? "text-primary" : "text-muted-foreground"
                   }`}
-                  onClick={() => setIsOpen(false)}
                   style={{ animationDelay: `${index * 50}ms` }}
                 >
                   {link.name}
                 </Link>
               ))}
               <div className="px-3 py-2">
-                <Button asChild variant="default" size="sm" className="w-full hover:scale-105 transition-all duration-300">
+                <Button
+                  asChild
+                  variant="default"
+                  size="sm"
+                  className="w-full hover:scale-105 transition-all duration-300"
+                >
                   <Link to="/login">Login</Link>
                 </Button>
               </div>
