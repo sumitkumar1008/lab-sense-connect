@@ -29,31 +29,31 @@ const Home = () => {
       <section className="relative py-20 px-4 sm:px-6 lg:px-8">
         <div className="max-w-7xl mx-auto">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
-            <div className="space-y-8">
+            <div className="space-y-8 animate-fade-in">
               <div className="space-y-4">
-                <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-foreground leading-tight">
+                <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-foreground leading-tight animate-fade-in [animation-delay:200ms]">
                   Understand Your
-                  <span className="bg-gradient-hero bg-clip-text text-transparent"> Lab Results </span>
+                  <span className="bg-gradient-hero bg-clip-text text-transparent animate-glow"> Lab Results </span>
                   Instantly
                 </h1>
-                <p className="text-xl text-muted-foreground max-w-lg">
+                <p className="text-xl text-muted-foreground max-w-lg animate-fade-in [animation-delay:400ms]">
                   LabSense transforms complex medical test results into clear, actionable insights. 
                   Get instant explanations, smart triage, and safe guidance for your health data.
                 </p>
               </div>
               
-              <div className="flex flex-col sm:flex-row gap-4">
-                <Button asChild size="lg" className="bg-gradient-primary hover:shadow-medium transition-all">
+              <div className="flex flex-col sm:flex-row gap-4 animate-fade-in [animation-delay:600ms]">
+                <Button asChild size="lg" className="bg-gradient-primary hover:shadow-medium transition-all hover:scale-105 duration-300">
                   <Link to="/chat">
                     Get Started <ArrowRight className="ml-2 h-5 w-5" />
                   </Link>
                 </Button>
-                <Button asChild variant="outline" size="lg">
+                <Button asChild variant="outline" size="lg" className="hover:scale-105 transition-all duration-300">
                   <Link to="#features">Learn More</Link>
                 </Button>
               </div>
 
-              <div className="flex items-center space-x-6 text-sm text-muted-foreground">
+              <div className="flex items-center space-x-6 text-sm text-muted-foreground animate-fade-in [animation-delay:800ms]">
                 <div className="flex items-center">
                   <CheckCircle className="h-4 w-4 text-accent mr-2" />
                   HIPAA Compliant
@@ -65,12 +65,12 @@ const Home = () => {
               </div>
             </div>
 
-            <div className="lg:order-last">
-              <div className="relative">
+            <div className="lg:order-last animate-fade-in [animation-delay:300ms]">
+              <div className="relative animate-float">
                 <img 
                   src={heroImage} 
                   alt="Modern laboratory with digital health technology"
-                  className="rounded-2xl shadow-medium w-full"
+                  className="rounded-2xl shadow-medium w-full transition-transform duration-500 hover:scale-105"
                 />
                 <div className="absolute inset-0 bg-gradient-primary/10 rounded-2xl"></div>
               </div>
@@ -93,10 +93,14 @@ const Home = () => {
 
           <div className="grid md:grid-cols-3 gap-8">
             {features.map((feature, index) => (
-              <Card key={index} className="border-0 shadow-soft hover:shadow-medium transition-all duration-300 hover:scale-105">
+              <Card 
+                key={index} 
+                className="border-0 shadow-soft hover:shadow-medium transition-all duration-500 hover:scale-105 animate-fade-in group"
+                style={{ animationDelay: `${index * 200 + 1000}ms` }}
+              >
                 <CardHeader className="text-center">
-                  <div className="w-16 h-16 bg-primary-light rounded-full flex items-center justify-center mx-auto mb-4">
-                    <feature.icon className="h-8 w-8 text-primary" />
+                  <div className="w-16 h-16 bg-primary-light rounded-full flex items-center justify-center mx-auto mb-4 group-hover:animate-float">
+                    <feature.icon className="h-8 w-8 text-primary transition-transform duration-300 group-hover:scale-110" />
                   </div>
                   <CardTitle className="text-xl">{feature.title}</CardTitle>
                 </CardHeader>
@@ -111,13 +115,12 @@ const Home = () => {
         </div>
       </section>
 
-      {/* About Section */}
       <section id="about" className="py-20 px-4 sm:px-6 lg:px-8 bg-card">
         <div className="max-w-4xl mx-auto text-center">
-          <h2 className="text-3xl sm:text-4xl font-bold text-foreground mb-8">
+          <h2 className="text-3xl sm:text-4xl font-bold text-foreground mb-8 animate-fade-in">
             About LabSense
           </h2>
-          <div className="space-y-6 text-lg text-muted-foreground">
+          <div className="space-y-6 text-lg text-muted-foreground animate-fade-in [animation-delay:200ms]">
             <p>
               LabSense was created to bridge the gap between complex medical testing and patient understanding. 
               Our mission is to empower individuals with clear, actionable insights about their health data.
@@ -129,8 +132,8 @@ const Home = () => {
             </p>
           </div>
           
-          <div className="mt-12 flex justify-center">
-            <Button asChild size="lg" variant="outline">
+          <div className="mt-12 flex justify-center animate-fade-in [animation-delay:400ms]">
+            <Button asChild size="lg" variant="outline" className="hover:scale-105 transition-all duration-300">
               <Link to="/chat">
                 Try LabSense Today <Upload className="ml-2 h-5 w-5" />
               </Link>

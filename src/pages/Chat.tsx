@@ -144,14 +144,18 @@ const Chat = () => {
         {/* Messages */}
         <ScrollArea className="flex-1 px-6 py-4">
           <div className="space-y-6 max-w-4xl mx-auto">
-            {messages.map((message) => (
-              <div key={message.id} className={`flex items-start space-x-3 ${
-                message.sender === "user" ? "flex-row-reverse space-x-reverse" : ""
-              }`}>
-                <div className={`w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0 ${
+            {messages.map((message, index) => (
+              <div 
+                key={message.id} 
+                className={`flex items-start space-x-3 animate-fade-in ${
+                  message.sender === "user" ? "flex-row-reverse space-x-reverse" : ""
+                }`}
+                style={{ animationDelay: `${index * 100}ms` }}
+              >
+                <div className={`w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0 transition-transform duration-300 hover:scale-110 ${
                   message.sender === "user" 
                     ? "bg-primary" 
-                    : "bg-gradient-primary"
+                    : "bg-gradient-primary animate-glow"
                 }`}>
                   {message.sender === "user" ? (
                     <User className="h-4 w-4 text-primary-foreground" />
@@ -163,14 +167,14 @@ const Chat = () => {
                 <div className={`flex-1 max-w-3xl ${
                   message.sender === "user" ? "text-right" : ""
                 }`}>
-                  <Card className={`${
+                  <Card className={`transition-all duration-300 hover:scale-[1.02] hover:shadow-medium ${
                     message.sender === "user" 
                       ? "bg-primary text-primary-foreground ml-auto" 
                       : "bg-card"
                   } border-0 shadow-soft`}>
                     <CardContent className="p-4">
                       {message.file && (
-                        <div className="mb-3 p-3 bg-accent/20 rounded-lg flex items-center space-x-2">
+                        <div className="mb-3 p-3 bg-accent/20 rounded-lg flex items-center space-x-2 animate-scale-in">
                           {message.file.type.includes('pdf') ? (
                             <FileText className="h-4 w-4 text-accent" />
                           ) : (
@@ -249,7 +253,7 @@ const Chat = () => {
               <Button 
                 onClick={handleSendMessage}
                 disabled={!inputMessage.trim() && !selectedFile}
-                className="bg-gradient-primary hover:shadow-medium"
+                className="bg-gradient-primary hover:shadow-medium hover:scale-105 transition-all duration-300"
               >
                 <Send className="h-4 w-4" />
               </Button>

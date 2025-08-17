@@ -35,20 +35,20 @@ const Login = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-subtle flex items-center justify-center px-4 sm:px-6 lg:px-8">
+    <div className="min-h-screen bg-gradient-subtle flex items-center justify-center px-4 sm:px-6 lg:px-8 animate-fade-in">
       <div className="w-full max-w-md">
         {/* Logo */}
-        <div className="text-center mb-8">
-          <Link to="/" className="inline-flex items-center space-x-2">
-            <div className="w-12 h-12 bg-gradient-primary rounded-xl flex items-center justify-center">
+        <div className="text-center mb-8 animate-fade-in [animation-delay:200ms]">
+          <Link to="/" className="inline-flex items-center space-x-2 group">
+            <div className="w-12 h-12 bg-gradient-primary rounded-xl flex items-center justify-center transition-transform duration-300 group-hover:scale-110 group-hover:rotate-3">
               <Activity className="w-7 h-7 text-primary-foreground" />
             </div>
-            <span className="text-2xl font-bold text-foreground">LabSense</span>
+            <span className="text-2xl font-bold text-foreground transition-colors duration-300 group-hover:text-primary">LabSense</span>
           </Link>
           <p className="mt-2 text-muted-foreground">Access your health insights</p>
         </div>
 
-        <Card className="shadow-medium border-0">
+        <Card className="shadow-medium border-0 animate-scale-in [animation-delay:400ms]">
           <CardHeader className="text-center pb-4">
             <CardTitle className="text-2xl">Welcome</CardTitle>
             <CardDescription>
@@ -59,22 +59,22 @@ const Login = () => {
           <CardContent>
             <Tabs defaultValue="login" className="w-full">
               <TabsList className="grid w-full grid-cols-2 mb-6">
-                <TabsTrigger value="login">Sign In</TabsTrigger>
-                <TabsTrigger value="signup">Sign Up</TabsTrigger>
+                <TabsTrigger value="login" className="transition-all duration-300 hover:scale-105">Sign In</TabsTrigger>
+                <TabsTrigger value="signup" className="transition-all duration-300 hover:scale-105">Sign Up</TabsTrigger>
               </TabsList>
               
               {/* Login Tab */}
-              <TabsContent value="login">
+              <TabsContent value="login" className="animate-fade-in">
                 <form onSubmit={handleLogin} className="space-y-4">
-                  <div className="space-y-2">
+                  <div className="space-y-2 animate-fade-in [animation-delay:100ms]">
                     <Label htmlFor="login-email">Email</Label>
-                    <div className="relative">
-                      <Mail className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
+                    <div className="relative group">
+                      <Mail className="absolute left-3 top-3 h-4 w-4 text-muted-foreground group-focus-within:text-primary transition-colors duration-300" />
                       <Input
                         id="login-email"
                         type="email"
                         placeholder="Enter your email"
-                        className="pl-10"
+                        className="pl-10 transition-all duration-300 focus:scale-105"
                         value={loginData.email}
                         onChange={(e) => setLoginData({ ...loginData, email: e.target.value })}
                         required
@@ -82,22 +82,22 @@ const Login = () => {
                     </div>
                   </div>
                   
-                  <div className="space-y-2">
+                  <div className="space-y-2 animate-fade-in [animation-delay:200ms]">
                     <Label htmlFor="login-password">Password</Label>
-                    <div className="relative">
-                      <Lock className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
+                    <div className="relative group">
+                      <Lock className="absolute left-3 top-3 h-4 w-4 text-muted-foreground group-focus-within:text-primary transition-colors duration-300" />
                       <Input
                         id="login-password"
                         type={showPassword ? "text" : "password"}
                         placeholder="Enter your password"
-                        className="pl-10 pr-10"
+                        className="pl-10 pr-10 transition-all duration-300 focus:scale-105"
                         value={loginData.password}
                         onChange={(e) => setLoginData({ ...loginData, password: e.target.value })}
                         required
                       />
                       <button
                         type="button"
-                        className="absolute right-3 top-3 text-muted-foreground hover:text-foreground"
+                        className="absolute right-3 top-3 text-muted-foreground hover:text-foreground transition-all duration-300 hover:scale-110"
                         onClick={() => setShowPassword(!showPassword)}
                       >
                         {showPassword ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
@@ -105,12 +105,12 @@ const Login = () => {
                     </div>
                   </div>
                   
-                  <Button type="submit" className="w-full bg-gradient-primary hover:shadow-medium">
+                  <Button type="submit" className="w-full bg-gradient-primary hover:shadow-medium hover:scale-105 transition-all duration-300 animate-fade-in [animation-delay:300ms]">
                     Sign In
                   </Button>
                   
-                  <div className="text-center">
-                    <a href="#" className="text-sm text-primary hover:underline">
+                  <div className="text-center animate-fade-in [animation-delay:400ms]">
+                    <a href="#" className="text-sm text-primary hover:underline transition-all duration-300 hover:scale-105 inline-block">
                       Forgot your password?
                     </a>
                   </div>
